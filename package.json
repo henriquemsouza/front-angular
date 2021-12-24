@@ -1,6 +1,12 @@
 {
   "name": "spa",
   "version": "0.0.0",
+  "author": "Henrique martins de Souza",
+  "description": "A basic front angular",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/henriquemsouza/front-angular.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -15,9 +21,12 @@
     "@angular/compiler": "~13.1.0",
     "@angular/core": "~13.1.0",
     "@angular/forms": "~13.1.0",
+    "@angular/localize": "~13.1.0",
     "@angular/platform-browser": "~13.1.0",
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
+    "@ng-bootstrap/ng-bootstrap": "^11.0.0",
+    "bootstrap": "^4.6.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

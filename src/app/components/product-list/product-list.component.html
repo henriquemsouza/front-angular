@@ -1,0 +1,67 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        [(ngModel)]="title"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchTitle()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Products List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let product of products; let i = index"
+        (click)="setSelectedProduct(product, i)"
+        [class.active]="i == currentIndex"
+      >
+        {{ product.name }}
+        <span class="badge badge-pill badge-secondary">{{ product.code }}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentProduct">
+      <br />
+      <br />
+      <div>
+        <label><strong>Name:</strong></label>
+        {{ currentProduct?.name }}
+      </div>
+      <div>
+        <label><strong>Code:</strong></label>
+        {{ currentProduct?.code }}
+      </div>
+
+      <div>
+        <label><strong>Category:</strong></label>
+        {{ currentProduct?.category?.name }}
+      </div>
+
+      <a
+        type="button"
+        class="btn btn-primary"
+        routerLink="/product/{{ currentProduct?.id }}"
+      >
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentProduct">
+      <br />
+      <p>...</p>
+    </div>
+  </div>
+</div>
