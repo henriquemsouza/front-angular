@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: spa-front
+    working_dir: $PWD
+    command: ./scripts/start.sh
+    network_mode: host
+    volumes:
+      - $PWD:$PWD
+
+volumes:
+  .volumes:

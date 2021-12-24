@@ -1,0 +1,5 @@
+FROM node:14.15
+
+ENV NODE_ENV=development
+
+EXPOSE 8080
