@@ -5,7 +5,6 @@ import { CategoryService } from 'src/app/services/category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -22,6 +21,7 @@ export class AddProductComponent implements OnInit {
   showError = false;
   errorMessage = '';
   categories = null;
+  showLoader = true;
 
   productForm!: FormGroup;
   constructor(
@@ -33,7 +33,7 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.initFormBuilder();
-
+    this.showLoader = false;
     this.findCategories();
   }
 
@@ -58,6 +58,7 @@ export class AddProductComponent implements OnInit {
   }
 
   saveProduct(): void {
+    this.showLoader = true;
     const data = {
       name: this.product.name,
       code: this.product.code,
@@ -65,6 +66,7 @@ export class AddProductComponent implements OnInit {
     };
 
     if (!this.productForm.valid) {
+      this.showLoader = false;
       return;
     }
 
@@ -78,6 +80,7 @@ export class AddProductComponent implements OnInit {
       (error) => {
         this.showError = true;
         this.errorMessage = error.error.message;
+        this.showLoader = false;
         console.log(error);
       }
     );

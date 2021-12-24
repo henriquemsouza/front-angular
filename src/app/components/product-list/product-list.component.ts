@@ -24,6 +24,8 @@ export class ProductListComponent implements OnInit {
   currentProduct: product | undefined;
   currentIndex = -1;
   title = '';
+  showLoader = true;
+
 
   constructor(private productService: ProductService) {}
 
@@ -35,7 +37,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getAll().subscribe(
       (data) => {
         this.products = data.products;
-        console.log('data', this.products);
+        this.showLoader = false;
       },
       (error) => {
         console.log(error);

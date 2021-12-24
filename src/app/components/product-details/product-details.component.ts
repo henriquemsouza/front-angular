@@ -30,6 +30,7 @@ export class ProductDetailsComponent implements OnInit {
   productId = '';
   errorMessage = '';
   showError = false;
+  showLoader = true;
 
   constructor(
     private productService: ProductService,
@@ -84,6 +85,7 @@ export class ProductDetailsComponent implements OnInit {
           this.currentProduct?.category?.id,
           { onlySelf: true }
         );
+        this.showLoader = false
       },
       (error) => {
         console.log(error);
@@ -91,7 +93,7 @@ export class ProductDetailsComponent implements OnInit {
     );
   }
 
-  updatePublished(): void {
+  updateProduct(): void {
     if (!this.productForm.valid) {
       return;
     }

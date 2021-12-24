@@ -52,7 +52,6 @@
             formControlName="category"
             class="form-control"
           >
-
             <option *ngFor="let item of categories" [value]="item.id">
               {{ item.name }}
             </option>
@@ -66,16 +65,20 @@
           </span>
         </div>
 
-        <button (click)="updatePublished()" class="btn btn-success">Submit</button>
+        <button (click)="updateProduct()" class="btn btn-success">
+          Save
+        </button>
       </form>
     </div>
 
-    <!-- <div *ngIf="showError" class="alert alert-danger" role="alert">
+    <div *ngIf="showError" class="alert alert-danger" role="alert">
       <h4>{{ errorMessage }}</h4>
     </div>
+  </div>
 
-    <div *ngIf="submitted"  class="alert alert-success" role="alert">
-      <h4>Product submitted successfully!</h4>
-    </div> -->
+  <div *ngIf="showLoader">
+    <div class="spinner-grow custom-loader" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
 </div>

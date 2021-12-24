@@ -1,0 +1,16 @@
+.main-container {
+  /* margin-left: 40px !important;
+  margin-right: 40px !important; */
+
+  width: 100vw;
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-loader {
+  width: 5rem;
+  height: 5rem;
+}
