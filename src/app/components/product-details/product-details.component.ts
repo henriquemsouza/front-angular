@@ -1,3 +1,4 @@
+import { Product } from './../../domain/product-interfaces';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { CategoryService } from 'src/app/services/category.service';
@@ -6,18 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
-export interface Category {
-  id: number;
-  name: string;
-}
 
-export interface product {
-  id: number;
-  code: string;
-  name: string;
-  createdAt: Date;
-  category?: Category;
-}
 
 @Component({
   selector: 'app-product-details',
@@ -25,7 +15,7 @@ export interface product {
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
-  currentProduct: product | undefined;
+  currentProduct!: Product;
   productForm!: FormGroup;
   categories = null;
   productId = '';
@@ -83,7 +73,7 @@ export class ProductDetailsComponent implements OnInit {
         // });
 
         this.productForm.controls['category'].setValue(
-          this.currentProduct?.category?.id,
+          this.currentProduct.category?.id,
           { onlySelf: true }
         );
         this.showLoader = false;

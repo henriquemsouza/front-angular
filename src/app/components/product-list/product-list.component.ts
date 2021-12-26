@@ -1,19 +1,7 @@
+import { Product } from './../../domain/product-interfaces';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
-
-export interface Category {
-  id: number;
-  name: string;
-}
-
-export interface product {
-  id: number;
-  code: string;
-  name: string;
-  createdAt: Date;
-  category?: Category;
-}
 
 @Component({
   selector: 'app-product-list',
@@ -21,8 +9,8 @@ export interface product {
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  products!: product[];
-  currentProduct: product | undefined;
+  products!: Product[];
+  currentProduct!: Product | undefined;
   currentIndex = -1;
   title = '';
   showLoader = true;
@@ -51,7 +39,7 @@ export class ProductListComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  setSelectedProduct(product: product, index: number): void {
+  setSelectedProduct(product: Product, index: number): void {
     this.currentProduct = product;
     this.currentIndex = index;
   }
