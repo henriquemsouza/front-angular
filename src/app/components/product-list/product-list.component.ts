@@ -39,7 +39,7 @@ export class ProductListComponent implements OnInit {
         this.showLoader = false;
       },
       (error) => {
-        console.log(error);
+        GenericErrorMessage();
       }
     );
   }
@@ -70,8 +70,6 @@ export class ProductListComponent implements OnInit {
     this.productService.searchProduct(this.code, this.categoryId).subscribe(
       (data) => {
         this.products = data.products;
-
-        console.log(data);
       },
       (error) => {
         GenericErrorMessage();
@@ -82,7 +80,6 @@ export class ProductListComponent implements OnInit {
   deleteProduct(): void {
     this.buttonDisabled = true;
     const productId = this.currentProduct?.id;
-    console.log('id,', this.currentProduct);
 
     this.showLoader = false;
 
@@ -98,7 +95,6 @@ export class ProductListComponent implements OnInit {
       (error) => {
         GenericErrorMessage();
         this.buttonDisabled = true;
-        console.log(error);
       }
     );
   }

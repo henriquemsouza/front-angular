@@ -10,3 +10,9 @@ export interface Category {
   id: number;
   name: string;
 }
+
+export interface ProductInfo {
+  code: string;
+  name: string;
+  categoryId: string;
+}

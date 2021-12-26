@@ -31,14 +31,17 @@ yarn start
 ├── app
 │   ├── components
 │   │   ├── add-product
+│   │   ├── form-title
+│   │   ├── loader
 │   │   ├── product-details
 │   │   └── product-list
 │   ├── domain
-│   └── services
+│   ├── services
+│   └── utils
 ├── assets
 └── environments
-```
 
+```
 
 
 

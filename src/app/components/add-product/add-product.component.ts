@@ -8,6 +8,7 @@ import {
   GenericErrorMessage,
   SuccessMessage,
 } from 'src/app/utils/general-messages';
+import { Category, ProductInfo } from 'src/app/domain/product-interfaces';
 
 @Component({
   selector: 'app-add-product',
@@ -15,17 +16,11 @@ import {
   styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent implements OnInit {
-  product = {
-    name: '',
-    code: null,
-    published: false,
-    category: null,
-  };
-  submitted = false;
-  showError = false;
+  submitted: boolean = false;
+  showError: boolean = false;
   errorMessage = '';
-  categories = null;
-  showLoader = true;
+  categories!: Category[];
+  showLoader: boolean = true;
   buttonDisabled: boolean = false;
 
   productForm!: FormGroup;
@@ -64,21 +59,21 @@ export class AddProductComponent implements OnInit {
 
   saveProduct(): void {
     this.showLoader = true;
-    const data = {
-      name: this.product.name,
-      code: this.product.code,
-      categoryId: this.product.category,
-    };
 
     if (!this.productForm.valid) {
       this.showLoader = false;
       return;
     }
 
+    const data: ProductInfo = {
+      name: this.productForm.get('name')?.value,
+      code: this.productForm.get('code')?.value,
+      categoryId: this.productForm.get('category')?.value,
+    };
+
     this.buttonDisabled = true;
     this.productService.create(data).subscribe(
       (response) => {
-        console.log(response);
         this.submitted = true;
 
         SuccessMessage('Product successfully created!');
@@ -93,8 +88,6 @@ export class AddProductComponent implements OnInit {
         this.errorMessage = error.error.message;
         this.showLoader = false;
         this.buttonDisabled = false;
-
-        console.log(error);
       }
     );
   }

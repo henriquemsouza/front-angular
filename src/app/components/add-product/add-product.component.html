@@ -13,7 +13,6 @@
             type="text"
             class="form-control"
             id="name"
-            [(ngModel)]="product.name"
             formControlName="name"
             name="name"
             required
@@ -33,7 +32,6 @@
             class="form-control"
             id="code"
             required
-            [(ngModel)]="product.code"
             formControlName="code"
             name="code"
           />
@@ -50,7 +48,6 @@
           <label for="description">Category</label>
           <select
             name="category"
-            [(ngModel)]="product.category"
             required
             formControlName="category"
             class="form-control"
@@ -73,7 +70,7 @@
           class="btn btn-success"
           [disabled]="buttonDisabled"
         >
-          Submit
+          Save
         </button>
       </form>
     </div>

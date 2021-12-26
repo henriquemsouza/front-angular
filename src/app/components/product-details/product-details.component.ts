@@ -19,10 +19,10 @@ export class ProductDetailsComponent implements OnInit {
   currentProduct!: Product;
   productForm!: FormGroup;
   categories!: Category[];
-  productId = '';
-  errorMessage = '';
-  showError = false;
-  showLoader = true;
+  productId: string = '';
+  errorMessage: string = '';
+  showError: boolean = false;
+  showLoader: boolean = true;
   buttonDisabled: boolean = false;
 
   constructor(
@@ -84,7 +84,6 @@ export class ProductDetailsComponent implements OnInit {
       },
       (error) => {
         GenericErrorMessage();
-        console.log(error);
       }
     );
   }
@@ -100,7 +99,6 @@ export class ProductDetailsComponent implements OnInit {
       categoryId: this.productForm.get('category')?.value,
     };
 
-    console.log('****', data);
     this.buttonDisabled = true;
 
     this.productService.update(data).subscribe(

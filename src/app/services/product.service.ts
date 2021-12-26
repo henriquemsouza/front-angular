@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ProductInfo } from '../domain/product-interfaces';
 
 const baseUrl = 'http://localhost:3000/v1/marketplace/';
 
@@ -18,7 +19,7 @@ export class ProductService {
     return this.http.get(`${baseUrl}products/list`, { headers: { id } });
   }
 
-  create(data: any): Observable<any> {
+  create(data: ProductInfo): Observable<any> {
     return this.http.post(`${baseUrl}product`, data);
   }
 
