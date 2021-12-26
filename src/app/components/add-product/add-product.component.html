@@ -72,9 +72,5 @@
     </div>
   </div>
 
-  <div *ngIf="showLoader">
-    <div class="spinner-grow custom-loader" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
+  <app-loader [showLoader]="showLoader"></app-loader>
 </div>
