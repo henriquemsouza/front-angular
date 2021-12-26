@@ -5,9 +5,10 @@ import { CategoryService } from 'src/app/services/category.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
-
-
+import {
+  GenericErrorMessage,
+  SuccessMessage,
+} from 'src/app/utils/general-messages';
 
 @Component({
   selector: 'app-product-details',
@@ -22,6 +23,7 @@ export class ProductDetailsComponent implements OnInit {
   errorMessage = '';
   showError = false;
   showLoader = true;
+  buttonDisabled: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -89,24 +91,26 @@ export class ProductDetailsComponent implements OnInit {
       return;
     }
 
+    this.buttonDisabled = true;
+
     const data = {
       id: this.currentProduct?.id,
       name: this.productForm.get('name')?.value,
       categoryId: this.productForm.get('category')?.value,
     };
-    console.log(0, data);
 
     this.productService.update(data).subscribe(
       (response) => {
-        Swal.fire('Product successfully updated!', '', 'success');
+        SuccessMessage('Product successfully updated!');
+        this.buttonDisabled = false;
 
         this.router.navigate(['']);
       },
       (error) => {
-        Swal.fire('Oops... something went wrong', '', 'error');
-
+        GenericErrorMessage();
         this.showError = true;
         this.errorMessage = error.error.message;
+        this.buttonDisabled = false;
       }
     );
   }

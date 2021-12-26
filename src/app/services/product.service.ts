@@ -34,7 +34,9 @@ export class ProductService {
     return this.http.delete(baseUrl);
   }
 
-  findByTitle(title: string): Observable<any> {
-    return this.http.get(`${baseUrl}?title=${title}`);
+  searchProduct(code: string, category: string): Observable<any> {
+    return this.http.get(`${baseUrl}products/list`, {
+      headers: { code, category },
+    });
   }
 }

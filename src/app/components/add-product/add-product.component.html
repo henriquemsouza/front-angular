@@ -63,7 +63,13 @@
           </span>
         </div>
 
-        <button (click)="saveProduct()" class="btn btn-success">Submit</button>
+        <button
+          (click)="saveProduct()"
+          class="btn btn-success"
+          [disabled]="buttonDisabled"
+        >
+          Submit
+        </button>
       </form>
     </div>
 

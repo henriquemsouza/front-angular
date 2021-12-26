@@ -1,17 +1,32 @@
 <div class="row products-list-main-row">
-  <div class="col-md-8">
+  <div class="col-md-12">
     <div class="input-group mb-3">
       <input
         type="text"
         class="form-control"
-        placeholder="Search by title"
-        [(ngModel)]="title"
+        placeholder="Code"
+        [(ngModel)]="code"
       />
+
+      <select
+        name="category"
+        [(ngModel)]="categoryId"
+        required
+        class="form-control"
+        placeholder="teste"
+      >
+        <option value="" selected>Selected a Category</option>
+
+        <option *ngFor="let item of categories" [value]="item.id">
+          {{ item.name }}
+        </option>
+      </select>
+
       <div class="input-group-append">
         <button
           class="btn btn-outline-secondary"
           type="button"
-          (click)="searchTitle()"
+          (click)="searchProduct()"
         >
           Search
         </button>
@@ -52,13 +67,14 @@
         {{ currentProduct?.category?.name }}
       </div>
 
-      <a
+      <button
         type="button"
         class="btn btn-primary"
         routerLink="/product/{{ currentProduct?.id }}"
+        [disabled]="buttonDisabled"
       >
         Edit
-      </a>
+      </button>
 
       <button
         type="button"
@@ -69,6 +85,7 @@
           confirmButtonText: 'Confirm'
         }"
         (confirm)="deleteProduct()"
+        [disabled]="buttonDisabled"
       >
         Delete
       </button>

@@ -65,7 +65,11 @@
           </span>
         </div>
 
-        <button (click)="updateProduct()" class="btn btn-success">
+        <button
+          (click)="updateProduct()"
+          class="btn btn-success"
+          [disabled]="buttonDisabled"
+        >
           Save
         </button>
       </form>
@@ -75,7 +79,6 @@
       <h4>{{ errorMessage }}</h4>
     </div>
   </div>
-
 
   <app-loader [showLoader]="showLoader"></app-loader>
 </div>

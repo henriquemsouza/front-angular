@@ -4,7 +4,10 @@ import { ProductService } from 'src/app/services/product.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import {
+  GenericErrorMessage,
+  SuccessMessage,
+} from 'src/app/utils/general-messages';
 
 @Component({
   selector: 'app-add-product',
@@ -23,6 +26,7 @@ export class AddProductComponent implements OnInit {
   errorMessage = '';
   categories = null;
   showLoader = true;
+  buttonDisabled: boolean = false;
 
   productForm!: FormGroup;
   constructor(
@@ -71,21 +75,25 @@ export class AddProductComponent implements OnInit {
       return;
     }
 
+    this.buttonDisabled = true;
     this.productService.create(data).subscribe(
       (response) => {
         console.log(response);
         this.submitted = true;
 
-        Swal.fire('Product successfully created!', '', 'success');
+        SuccessMessage('Product successfully created!');
+        this.buttonDisabled = false;
 
         this.router.navigate(['']);
       },
       (error) => {
-        Swal.fire('Oops... something went wrong', '', 'error');
+        GenericErrorMessage();
 
         this.showError = true;
         this.errorMessage = error.error.message;
         this.showLoader = false;
+        this.buttonDisabled = false;
+
         console.log(error);
       }
     );
