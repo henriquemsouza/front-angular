@@ -38,3 +38,13 @@ yarn start
 ├── assets
 └── environments
 ```
+
+
+
+
+## Made with
+
+
+[Angular 13.x](https://angular.io/)
+
+[SweetAlert2](https://github.com/sweetalert2/ngx-sweetalert2)
