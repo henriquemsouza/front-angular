@@ -4,6 +4,7 @@ import { CategoryService } from 'src/app/services/category.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 export interface Category {
   id: number;
@@ -85,7 +86,7 @@ export class ProductDetailsComponent implements OnInit {
           this.currentProduct?.category?.id,
           { onlySelf: true }
         );
-        this.showLoader = false
+        this.showLoader = false;
       },
       (error) => {
         console.log(error);
@@ -107,10 +108,13 @@ export class ProductDetailsComponent implements OnInit {
 
     this.productService.update(data).subscribe(
       (response) => {
-        console.log(response);
+        Swal.fire('Product successfully updated!', '', 'success');
+
         this.router.navigate(['']);
       },
       (error) => {
+        Swal.fire('Oops... something went wrong', '', 'error');
+
         this.showError = true;
         this.errorMessage = error.error.message;
       }

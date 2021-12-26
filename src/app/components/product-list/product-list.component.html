@@ -36,7 +36,6 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-
   </div>
   <div class="col-md-6">
     <div *ngIf="currentProduct">
@@ -63,6 +62,19 @@
       >
         Edit
       </a>
+
+      <button
+        type="button"
+        class="btn btn-danger custom-delete-btn"
+        [swal]="{
+          title: 'Do you really want to delete the selected product?',
+          showCancelButton: true,
+          confirmButtonText: 'Confirm'
+        }"
+          (confirm)="deleteProduct()"
+      >
+        Delete
+      </button>
     </div>
 
     <div *ngIf="!currentProduct">

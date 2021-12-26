@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService  } from 'src/app/services/product.service';
+import { ProductService } from 'src/app/services/product.service';
+import Swal from 'sweetalert2';
 
 export interface Category {
   id: number;
@@ -25,7 +26,6 @@ export class ProductListComponent implements OnInit {
   currentIndex = -1;
   title = '';
   showLoader = true;
-
 
   constructor(private productService: ProductService) {}
 
@@ -63,6 +63,26 @@ export class ProductListComponent implements OnInit {
         console.log(data);
       },
       (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  deleteProduct() {
+    const productId = this.currentProduct?.id;
+    console.log('id,', this.currentProduct);
+
+    this.showLoader = false;
+
+    this.productService.delete(`${productId}`).subscribe(
+      (data) => {
+        this.showLoader = false;
+
+        Swal.fire('Product successfully deleted!', '', 'success');
+        window.location.reload();
+      },
+      (error) => {
+        Swal.fire('Oops... something went wrong', '', 'error');
         console.log(error);
       }
     );

@@ -4,6 +4,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-product',
@@ -75,9 +76,13 @@ export class AddProductComponent implements OnInit {
         console.log(response);
         this.submitted = true;
 
+        Swal.fire('Product successfully created!', '', 'success');
+
         this.router.navigate(['']);
       },
       (error) => {
+        Swal.fire('Oops... something went wrong', '', 'error');
+
         this.showError = true;
         this.errorMessage = error.error.message;
         this.showLoader = false;
