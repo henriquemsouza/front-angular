@@ -30,10 +30,6 @@ export class ProductService {
     return this.http.delete(`${baseUrl}product?id=${id}`);
   }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
-  }
-
   searchProduct(code: string, category: string): Observable<any> {
     return this.http.get(`${baseUrl}products/list`, {
       headers: { code, category },

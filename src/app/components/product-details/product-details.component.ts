@@ -1,4 +1,4 @@
-import { Product } from './../../domain/product-interfaces';
+import { Category, Product } from './../../domain/product-interfaces';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { CategoryService } from 'src/app/services/category.service';
@@ -18,7 +18,7 @@ import {
 export class ProductDetailsComponent implements OnInit {
   currentProduct!: Product;
   productForm!: FormGroup;
-  categories = null;
+  categories!: Category[];
   productId = '';
   errorMessage = '';
   showError = false;
@@ -36,11 +36,11 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     const productId = `${this.route.snapshot.paramMap.get('id')}`;
     this.productId = productId;
+
     this.initFormBuilder();
+    this.findCategories();
 
     this.getProduct(productId);
-
-    this.findCategories();
   }
 
   private initFormBuilder() {
@@ -55,6 +55,8 @@ export class ProductDetailsComponent implements OnInit {
     this.categoryService.getAll().subscribe(
       (data) => {
         this.categories = data.categories;
+
+        this.setCurrentCategory();
       },
       (error) => {
         this.showError = true;
@@ -63,24 +65,25 @@ export class ProductDetailsComponent implements OnInit {
     );
   }
 
+  private setCurrentCategory() {
+    if (this.currentProduct && this.categories) {
+      this.productForm.controls['category'].setValue(
+        this.currentProduct?.category?.id,
+        { onlySelf: true }
+      );
+    }
+  }
+
   getProduct(id: string): void {
     this.productService.get(id).subscribe(
       (data) => {
         this.currentProduct = data.products[0];
-        console.log(data);
-        // this.productForm.get('category')?.setValue(this.currentProduct?.category,  {onlySelf: true})
 
-        // this.productForm.patchValue({
-        //   category: this.currentProduct?.category?.id,
-        // });
-
-        this.productForm.controls['category'].setValue(
-          this.currentProduct.category?.id,
-          { onlySelf: true }
-        );
+        this.setCurrentCategory();
         this.showLoader = false;
       },
       (error) => {
+        GenericErrorMessage();
         console.log(error);
       }
     );
@@ -91,13 +94,14 @@ export class ProductDetailsComponent implements OnInit {
       return;
     }
 
-    this.buttonDisabled = true;
-
     const data = {
       id: this.currentProduct?.id,
       name: this.productForm.get('name')?.value,
       categoryId: this.productForm.get('category')?.value,
     };
+
+    console.log('****', data);
+    this.buttonDisabled = true;
 
     this.productService.update(data).subscribe(
       (response) => {

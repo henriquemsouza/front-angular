@@ -12,6 +12,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LoaderComponent } from './components/loader/loader.component';
+import { FormTitleComponent } from './components/form-title/form-title.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     AddProductComponent,
     ProductDetailsComponent,
     ProductListComponent,
-    LoaderComponent
+    LoaderComponent,
+    FormTitleComponent
   ],
   imports: [
     BrowserModule,

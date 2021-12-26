@@ -1,4 +1,4 @@
-import { Product } from './../../domain/product-interfaces';
+import { Category, Product } from './../../domain/product-interfaces';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { CategoryService } from 'src/app/services/category.service';
@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit {
   code = '';
   categoryId: string = '';
   showLoader = true;
-  categories = null;
+  categories!: Category[];
   buttonDisabled: boolean = false;
 
   constructor(
