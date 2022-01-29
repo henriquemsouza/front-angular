@@ -17,7 +17,6 @@ describe('#ProductListComponent', () => {
   let productServicesMock;
   let categoryServiceMock;
 
-
   const products = ProductsMock;
 
   const createMocks = () => {
@@ -62,7 +61,6 @@ describe('#ProductListComponent', () => {
     const listedItems = fixture.debugElement.queryAll(
       By.css('.list-group-item')
     );
-
 
     expect(productsList.textContent).toContain('Products List');
     expect(listedItems.length).toBe(2);

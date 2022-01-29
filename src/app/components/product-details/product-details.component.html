@@ -5,7 +5,7 @@
       [title]="'Edit Product'"
     ></app-form-title>
     <div *ngIf="currentProduct">
-      <form [formGroup]="productForm">
+      <form [formGroup]="productForm" id="edit-product-form">
         <div class="form-group">
           <label for="title">Name</label>
           <input
